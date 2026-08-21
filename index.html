@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PN CodeX - Official</title>
+
+<style>
+:root{
+  --bg:#07111f;
+  --bg2:#0d1728;
+  --card:#111f33;
+  --card2:#16263d;
+  --text:#ffffff;
+  --muted:#9aa9bd;
+  --blue:#008cff;
+  --cyan:#00d9ff;
+  --border:#243b59;
+  --danger:#ff426d;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Arial,Segoe UI,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.5;
+  transition:.3s;
+}
+
+body.light{
+  --bg:#eef4fa;
+  --bg2:#ffffff;
+  --card:#ffffff;
+  --card2:#f4f8fc;
+  --text:#101827;
+  --muted:#526174;
+  --border:#d6e0eb;
+}
+
+/* HEADER */
+
+.header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:8px 18px;
+  background:rgba(7,17,31,.94);
+  backdrop-filter:blur(15px);
+  border-bottom:1px solid var(--border);
+}
+
+.logo-box{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.logo-box img{
+  width:48px;
+  height:48px;
+  object-fit:cover;
+  border-radius:12px;
+}
+
+.logo-text{
+  font-size:21px;
+  font-weight:bold;
+}
+
+.logo-text span{
+  color:var(--cyan);
+}
+
+.header-buttons{
+  display:flex;
+  gap:8px;
+}
+
+.icon-btn{
+  width:42px;
+  height:42px;
+  border:none;
+  border-radius:12px;
+  background:var(--card2);
+  color:white;
+  font-size:20px;
+  cursor:pointer;
+  border:1px solid var(--border);
+}
+
+/* SIDE MENU */
+
+.sidebar{
+  position:fixed;
+  z-index:2000;
+  left:-300px;
+  top:0;
+  width:290px;
+  height:100vh;
+  background:#091321;
+  padding:20px;
+  transition:.3s;
+  overflow-y:auto;
+  box-shadow:10px 0 30px rgba(0,0,0,.4);
+}
+
+.sidebar.open{
+  left:0;
+}
+
+.sidebar-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:20px;
+}
+
+.sidebar-head img{
+  width:55px;
+  height:55px;
+  border-radius:15px;
+}
+
+.close-btn{
+  border:none;
+  background:none;
+  color:white;
+  font-size:30px;
+}
+
+.menu-link{
+  display:block;
+  color:white;
+  text-decoration:none;
+  padding:14px;
+  margin:7px 0;
+  border-radius:12px;
+  background:#101d30;
+  border:1px solid #1d3049;
+}
+
+.menu-link:hover{
+  border-color:var(--cyan);
+  color:var(--cyan);
+}
+
+/* OVERLAY */
+
+.overlay{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:1500;
+  background:rgba(0,0,0,.6);
+}
+
+.overlay.show{
+  display:block;
+}
+
+/* HERO */
+
+.hero{
+  padding:45px 20px;
+  text-align:center;
+  max-width:1000px;
+  margin:auto;
+}
+
+.hero-logo{
+  width:170px;
+  height:170px;
+  object-fit:cover;
+  border-radius:35px;
+  box-shadow:0 0 40px rgba(0,217,255,.25);
+  margin-bottom:20px;
+}
+
+.hero h1{
+  font-size:42px;
+}
+
+.hero h1 span{
+  color:var(--cyan);
+}
+
+.tagline{
+  color:var(--cyan);
+  font-size:18px;
+  font-weight:bold;
+  margin:8px 0;
+}
+
+.hero p{
+  max-width:700px;
+  margin:15px auto 25px;
+  color:var(--muted);
+}
+
+.buttons{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:12px;
+}
+
+/* BUTTON */
+
+.btn{
+  display:inline-block;
+  border:none;
+  padding:12px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  text-decoration:none;
+  cursor:pointer;
+  font-size:14px;
+  transition:.2s;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.primary{
+  background:linear-gradient(135deg,var(--blue),var(--cyan));
+  color:white;
+}
+
+.secondary{
+  background:var(--card2);
+  color:white;
+  border:1px solid var(--border);
+}
+
+.green{
+  background:#16a34a;
+  color:white;
+}
+
+.red{
+  background:var(--danger);
+  color:white;
+}
+
+.insta-btn{
+  background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  color:white;
+}
+
+/* SECTION */
+
+.section{
+  max-width:1100px;
+  margin:45px auto;
+  padding:0 18px;
+}
+
+.section-title{
+  text-align:center;
+  font-size:28px;
+  color:var(--cyan);
+  margin-bottom:8px;
+}
+
+.section-subtitle{
+  text-align:center;
+  color:var(--muted);
+  margin-bottom:25px;
+}
+
+/* CARDS */
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:22px;
+  transition:.25s;
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:var(--cyan);
+  box-shadow:0 10px 30px rgba(0,217,255,.08);
+}
+
+.card-icon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.card h3{
+  margin-bottom:8px;
+}
+
+.card p{
+  color:var(--muted);
+  font-size:14px;
+  margin-bottom:18px;
+}
+
+/* PRICING */
+
+.price{
+  font-size:30px;
+  font-weight:bold;
+  color:var(--cyan);
+  margin:12px 0;
+}
+
+.features{
+  list-style:none;
+  margin:15px 0;
+}
+
+.features li{
+  padding:7px 0;
+  color:var(--muted);
+}
+
+.featured{
+  border:2px solid var(--cyan);
+  box-shadow:0 0 25px rgba(0,217,255,.12);
+}
+
+.badge{
+  display:inline-block;
+  background:var(--danger);
+  padding:5px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+/* BUDGET NOTICE BOX */
+.budget-box {
+  background: var(--card2);
+  border: 1px dashed var(--cyan);
+  border-radius: 16px;
+  padding: 20px;
+  text-align: center;
+  margin-top: 25px;
+}
+
+.budget-box h4 {
+  color: var(--cyan);
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.budget-box p {
+  color: var(--muted);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+/* WORKS */
+
+.work-img{
+  width:100%;
+  height:170px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+.work-price{
+  color:var(--cyan);
+  font-weight:bold;
+  margin-bottom:12px;
+}
+
+/* USER */
+
+.user-bar{
+  max-width:1000px;
+  margin:auto;
+  padding:0 18px;
+}
+
+.user-box{
+  background:var(--card);
+  border:1px solid var(--border);
+  padding:15px;
+  border-radius:14px;
+  display:none;
+  margin-bottom:10px;
+}
+
+/* FORM */
+
+.form{
+  max-width:600px;
+  margin:auto;
+  background:var(--card);
+  padding:25px;
+  border-radius:18px;
+  border:1px solid var(--border);
+}
+
+.input{
+  width:100%;
+  padding:13px;
+  margin-bottom:12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--bg2);
+  color:var(--text);
+  outline:none;
+}
+
+textarea.input{
+  min-height:120px;
+  resize:vertical;
+}
+
+/* ORDER MODAL */
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  background:rgba(0,0,0,.75);
+  padding:20px;
+  overflow:auto;
+}
+
+.modal.show{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.modal-box{
+  width:100%;
+  max-width:600px;
+  background:var(--card);
+  border:1px solid var(--cyan);
+  border-radius:20px;
+  padding:25px;
+  position:relative;
+}
+
+.modal-close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  background:none;
+  border:none;
+  color:white;
+  font-size:30px;
+}
+
+/* SEARCH */
+
+.search-box{
+  display:none;
+  padding:10px 18px;
+  background:var(--bg2);
+}
+
+.search-box.show{
+  display:block;
+}
+
+.search-box input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+}
+
+/* FOOTER */
+
+footer{
+  margin-top:60px;
+  padding:35px 20px;
+  text-align:center;
+  background:#050b14;
+  color:#8291a5;
+}
+
+footer strong{
+  color:var(--cyan);
+}
+
+.footer-links{
+  margin-top:15px;
+}
+
+.footer-links a{
+  color:var(--cyan);
+  margin:0 8px;
+  text-decoration:none;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+  .hero h1{
+    font-size:32px;
+  }
+
+  .hero-logo{
+    width:140px;
+    height:140px;
+  }
+
+  .section-title{
+    font-size:24px;
+  }
+
+  .header{
+    padding:8px 12px;
+  }
+
+  .logo-text{
+    font-size:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+  <div class="logo-box">
+
+    <img src="https://i.postimg.cc/brzDpVdF/file-000000008b4081fbac135d6de4b6f0a0.png" alt="PN CodeX Logo">
+
+    <div class="logo-text">
+      PN <span>CodeX</span>
+    </div>
+
+  </div>
+
+  <div class="header-buttons">
+
+    <button class="icon-btn" onclick="toggleSearch()">🔎</button>
+
+    <button class="icon-btn" onclick="toggleTheme()">🌙</button>
+
+    <button class="icon-btn" onclick="openMenu()">☰</button>
+
+  </div>
+
+</header>
+
+
+<!-- SEARCH -->
+
+<div id="searchBox" class="search-box">
+  <input
+    type="search"
+    id="searchInput"
+    placeholder="Search services, projects..."
+    oninput="searchServices()"
+  >
+</div>
+
+
+<!-- SIDEBAR -->
+
+<div id="overlay" class="overlay" onclick="closeMenu()"></div>
+
+<aside id="sidebar" class="sidebar">
+
+  <div class="sidebar-head">
+
+    <img src="https://i.postimg.cc/brzDpVdF/file-000000008b4081fbac135d6de4b6f0a0.png" alt="PN CodeX">
+
+    <button class="close-btn" onclick="closeMenu()">×</button>
+
+  </div>
+
+  <h2 style="color:#00d9ff;margin-bottom:15px;">
+    PN CodeX
+  </h2>
+
+  <a class="menu-link" href="#home" onclick="closeMenu()">🏠 Home</a>
+
+  <a class="menu-link" href="#services" onclick="closeMenu()">💼 Services</a>
+
+  <a class="menu-link" href="#pricing" onclick="closeMenu()">💰 Pricing</a>
+
+  <a class="menu-link" href="#works" onclick="closeMenu()">📁 My Works</a>
+
+  <a class="menu-link" href="#request" onclick="closeMenu()">📝 Project Request</a>
+
+  <a class="menu-link" href="#login" onclick="closeMenu()">👤 Login / Register</a>
+
+  <a class="menu-link" href="#contact" onclick="closeMenu()">📞 Contact</a>
+
+</aside>
+
+
+<!-- USER -->
+
+<div class="user-bar">
+
+  <div id="userBox" class="user-box">
+
+    👋 Welcome,
+    <strong id="userName"></strong>
+
+    <button
+      class="btn red"
+      style="float:right;padding:6px 12px;"
+      onclick="logout()"
+    >
+      Logout
+    </button>
+
+  </div>
+
+</div>
+
+
+<!-- HOME -->
+
+<section id="home" class="hero">
+
+  <img
+    src="https://i.postimg.cc/brzDpVdF/file-000000008b4081fbac135d6de4b6f0a0.png"
+    alt="PN CodeX Official Logo"
+    class="hero-logo"
+  >
+
+  <h1>
+    PN <span>CodeX</span>
+  </h1>
+
+  <div class="tagline">
+    Official Services & Digital Projects
+  </div>
+
+  <p>
+    Website, App, Game, Business Website और Technology Projects
+    के लिए PN CodeX से अपना project बनवाएँ।
+  </p>
+
+  <div class="buttons">
+
+    <a href="#services" class="btn primary">
+      🚀 Explore Services
+    </a>
+
+    <button
+      class="btn green"
+      onclick="openOrder('General Project Request')"
+    >
+      📝 Start Your Project
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- SERVICES -->
+
+<section id="services" class="section">
+
+  <h2 class="section-title">
+    💼 Our Services
+  </h2>
+
+  <p class="section-subtitle">
+    अपना project चुनें और Order Now दबाएँ।
+  </p>
+
+  <div id="serviceGrid" class="grid">
+
+    <div class="card service-card">
+
+      <div class="card-icon">🌐</div>
+
+      <h3>Website Development</h3>
+
+      <p>
+        Business, Portfolio, Personal और Professional Websites.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Website Development')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="card-icon">📱</div>
+
+      <h3>App Development</h3>
+
+      <p>
+        Android/Web based applications और custom app interfaces.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('App Development')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="card-icon">🎮</div>
+
+      <h3>Game Development</h3>
+
+      <p>
+        Simple 2D और Web-based games.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Game Development')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="card-icon">🛠️</div>
+
+      <h3>Website Modification</h3>
+
+      <p>
+        Existing website में design, features और functionality changes.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Website Modification')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="card-icon">🐞</div>
+
+      <h3>Bug Fixing</h3>
+
+      <p>
+        Website/app के errors और basic performance problems fix करना.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Bug Fixing')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card service-card">
+
+      <div class="card-icon">🤖</div>
+
+      <h3>Robotics / Tech Project</h3>
+
+      <p>
+        Robotics, IoT और technology project requirements के लिए request.
+      </p>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Robotics / Tech Project')"
+      >
+        Request Now
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- PRICING -->
+
+<section id="pricing" class="section">
+
+  <h2 class="section-title">
+    💰 Pricing
+  </h2>
+
+  <p class="section-subtitle">
+    Starting prices — final price project requirements पर depend करेगा।
+  </p>
+
+  <div class="grid">
+
+
+    <div class="card">
+
+      <h3>Website Basic</h3>
+
+      <div class="price">
+        ₹999+
+      </div>
+
+      <ul class="features">
+
+        <li>✔ Up to 3 Pages</li>
+        <li>✔ Responsive Design</li>
+        <li>✔ Basic UI</li>
+
+      </ul>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Website Basic - ₹999+')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card featured">
+
+      <span class="badge">
+        ⭐ POPULAR
+      </span>
+
+      <h3 style="margin-top:10px;">
+        Website Standard
+      </h3>
+
+      <div class="price">
+        ₹2,499+
+      </div>
+
+      <ul class="features">
+
+        <li>✔ Up to 6 Pages</li>
+        <li>✔ Modern Design</li>
+        <li>✔ Contact Form</li>
+        <li>✔ Responsive Layout</li>
+
+      </ul>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Website Standard - ₹2499+')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Website Pro</h3>
+
+      <div class="price">
+        ₹4,999+
+      </div>
+
+      <ul class="features">
+
+        <li>✔ Premium Design</li>
+        <li>✔ Animations</li>
+        <li>✔ Advanced Sections</li>
+        <li>✔ Basic SEO</li>
+
+      </ul>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Website Pro - ₹4999+')"
+      >
+        Order Now
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <h3>Custom Project</h3>
+
+      <div class="price">
+        Custom
+      </div>
+
+      <ul class="features">
+
+        <li>✔ Custom Requirements</li>
+        <li>✔ Custom Design</li>
+        <li>✔ Feature Discussion</li>
+
+      </ul>
+
+      <button
+        class="btn green"
+        onclick="openOrder('Custom Project')"
+      >
+        Get Quote
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- Price Negotiation Note -->
+  <div class="budget-box">
+    <h4>💡 Price High Lag Raha Hai?</h4>
+    <p>
+      Chinta mat kijiye! Agar aapka budget kam hai ya price zyada lag raha hai, toh tension mat lijiye. Hum aapke budget ke hisab se best option adjust kar sakte hain. Direct WhatsApp ya Instagram par message karke apna budget discuss karein!
+    </p>
+    <a href="https://wa.me/919420822397?text=Hi%20Pratik,%20mujhe%20project%20budget%20discuss%20karna%20hai." class="btn green" target="_blank">💬 Discuss Your Budget</a>
+  </div>
+
+</section>
+
+
+<!-- MY WORKS -->
+
+<section id="works" class="section">
+
+  <h2 class="section-title">
+    📁 My Works
+  </h2>
+
+  <p class="section-subtitle">
+    PN CodeX द्वारा बनाए गए projects.
+  </p>
+
+  <div class="grid">
+
+
+    <div class="card">
+
+      <img
+        src="https://i.postimg.cc/XNPLf1xq/Screenshot-2026-08-16-11-14-20-79-40deb401b9ffe8e1df2f1cc5ba480b12.jpg"
+        class="work-img"
+        alt="PN Official Website"
+      >
+
+      <h3>PN Official Website</h3>
+
+      <div class="work-price">
+        Starting ₹1,999+
+      </div>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('PN Official Website Type')"
+      >
+        Order Similar
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <img
+        src="https://i.postimg.cc/sfY5M73H/IMG-20260815-154728.jpg"
+        class="work-img"
+        alt="PN CodeX App"
+      >
+
+      <h3>PN CodeX App</h3>
+
+      <div class="work-price">
+        Starting ₹3,499+
+      </div>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('PN CodeX App Type')"
+      >
+        Order Similar
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <img
+        src="https://i.postimg.cc/cJq4fWtm/Screenshot-2026-08-16-11-24-33-15-9231a3843da0f5a5802c561befa3052e.jpg"
+        class="work-img"
+        alt="Business Website"
+      >
+
+      <h3>Business Website</h3>
+
+      <div class="work-price">
+        Starting ₹2,499+
+      </div>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Business Website Type')"
+      >
+        Order Similar
+      </button>
+
+    </div>
+
+
+    <div class="card">
+
+      <img
+        src="https://i.postimg.cc/yxy67V4j/Screenshot-2026-08-15-15-33-50-91-9231a3843da0f5a5802c561befa3052e.jpg"
+        class="work-img"
+        alt="Birthday Website"
+      >
+
+      <h3>Birthday Website</h3>
+
+      <div class="work-price">
+        Starting ₹299+
+      </div>
+
+      <button
+        class="btn primary"
+        onclick="openOrder('Birthday Website Type')"
+      >
+        Order Similar
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- ORDER MODAL -->
+
+<div id="orderModal" class="modal">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      onclick="closeOrder()"
+    >
+      ×
+    </button>
+
+    <h2 style="color:#00d9ff;margin-bottom:8px;">
+      📝 Project Request
+    </h2>
+
+    <p style="color:#9aa9bd;margin-bottom:20px;">
+      अपनी requirements भेजें। PN CodeX team project details के अनुसार
+      आपको contact करेगी।
+    </p>
+
+
+    <form id="orderForm">
+
+      <input
+        id="orderName"
+        class="input"
+        placeholder="Your Name"
+        required
+      >
+
+      <input
+        id="orderMobile"
+        class="input"
+        type="tel"
+        placeholder="Mobile / WhatsApp"
+        required
+      >
+
+      <input
+        id="orderEmail"
+        class="input"
+        type="email"
+        placeholder="Email"
+        required
+      >
+
+      <input
+        id="orderService"
+        class="input"
+        placeholder="Selected Service"
+        readonly
+        required
+      >
+
+      <textarea
+        id="orderDetails"
+        class="input"
+        placeholder="Project Details / Requirements"
+        required
+      ></textarea>
+
+      <button
+        type="submit"
+        class="btn green"
+        style="width:100%;"
+      >
+        📲 Send Project Request
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<section id="login" class="section">
+
+  <h2 class="section-title">
+    👤 Login / Register
+  </h2>
+
+  <p class="section-subtitle">
+    अपनी details save करें ताकि अगली बार form जल्दी भर सके।
+  </p>
+
+  <div class="form">
+
+    <input
+      id="loginName"
+      class="input"
+      placeholder="Your Name"
+    >
+
+    <input
+      id="loginMobile"
+      class="input"
+      placeholder="Mobile Number"
+      type="tel"
+    >
+
+    <input
+      id="loginEmail"
+      class="input"
+      placeholder="Email"
+      type="email"
+    >
+
+    <button
+      class="btn primary"
+      style="width:100%;"
+      onclick="loginUser()"
+    >
+      👤 Save Login
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact" class="section">
+
+  <h2 class="section-title">
+    📞 Contact PN CodeX
+  </h2>
+
+  <p class="section-subtitle">
+    Kisi bhi query ya customized budget ke liye humse directly contact karein!
+  </p>
+
+  <div class="grid">
+
+    <!-- WHATSAPP CARD -->
+    <div class="card" style="text-align:center;">
+
+      <div class="card-icon">📱</div>
+
+      <h3>WhatsApp</h3>
+
+      <p>
+        Project discussion ya fast reply ke liye WhatsApp par message karein.
+      </p>
+
+      <a
+        href="https://wa.me/919420822397?text=Hi%20Pratik,%20mujhe%20project%20ke%20silsile%20me%20baat%20karni%20hai."
+        class="btn green"
+        target="_blank"
+      >
+        Chat on WhatsApp
+      </a>
+
+    </div>
+
+    <!-- INSTAGRAM CARD -->
+    <div class="card" style="text-align:center;">
+
+      <div class="card-icon">📸</div>
+
+      <h3>Instagram</h3>
+
+      <p>
+        Follow karein aur Direct Message (DM) karke apna project discuss karein.
+      </p>
+
+      <a
+        href="https://www.instagram.com/pratik_nagose_?igsi=MXcyc2h3emtiazYwZg=="
+        class="btn insta-btn"
+        target="_blank"
+      >
+        Follow & Message
+      </a>
+
+    </div>
+
+    <!-- EMAIL CARD -->
+    <div class="card" style="text-align:center;">
+
+      <div class="card-icon">📧</div>
+
+      <h3>Email</h3>
+
+      <p>
+        Detailed project requirements Email ke zariye bhej sakte hain.
+      </p>
+
+      <a
+        href="mailto:nagosepratik2@gmail.com"
+        class="btn primary"
+      >
+        Send Email
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+  <h2>
+    PN <strong>CodeX</strong>
+  </h2>
+
+  <p>
+    Official Digital Projects & Services
+  </p>
+
+  <div class="footer-links">
+
+    <a href="#home">Home</a>
+
+    <a href="#services">Services</a>
+
+    <a href="#pricing">Pricing</a>
+
+    <a href="#works">Works</a>
+
+    <a href="#request" onclick="openOrder('General Project Request')">
+      Order
+    </a>
+
+  </div>
+
+  <br>
+
+  <small>
+    © 2026 PN CodeX. All Rights Reserved.
+  </small>
+
+</footer>
+
+
+<script>
+
+/* =========================
+   MENU
+========================= */
+
+function openMenu(){
+
+  document.getElementById("sidebar")
+    .classList.add("open");
+
+  document.getElementById("overlay")
+    .classList.add("show");
+
+}
+
+function closeMenu(){
+
+  document.getElementById("sidebar")
+    .classList.remove("open");
+
+  document.getElementById("overlay")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   THEME
+========================= */
+
+function toggleTheme(){
+
+  document.body.classList.toggle("light");
+
+  const mode =
+    document.body.classList.contains("light")
+    ? "light"
+    : "dark";
+
+  localStorage.setItem("pn_theme",mode);
+
+}
+
+
+/* =========================
+   SEARCH
+========================= */
+
+function toggleSearch(){
+
+  document
+    .getElementById("searchBox")
+    .classList.toggle("show");
+
+}
+
+
+function searchServices(){
+
+  const query =
+    document
+      .getElementById("searchInput")
+      .value
+      .toLowerCase();
+
+  const cards =
+    document.querySelectorAll(".service-card");
+
+  cards.forEach(card=>{
+
+    const text =
+      card.innerText.toLowerCase();
+
+    card.style.display =
+      text.includes(query)
+      ? "block"
+      : "none";
+
+  });
+
+}
+
+
+/* =========================
+   ORDER SYSTEM
+========================= */
+
+function openOrder(service){
+
+  document
+    .getElementById("orderService")
+    .value = service;
+
+  document
+    .getElementById("orderModal")
+    .classList.add("show");
+
+  loadUserIntoOrder();
+
+}
+
+
+function closeOrder(){
+
+  document
+    .getElementById("orderModal")
+    .classList.remove("show");
+
+}
+
+
+/* =========================
+   LOGIN
+========================= */
+
+function loginUser(){
+
+  const name =
+    document.getElementById("loginName").value.trim();
+
+  const mobile =
+    document.getElementById("loginMobile").value.trim();
+
+  const email =
+    document.getElementById("loginEmail").value.trim();
+
+
+  if(!name || !mobile || !email){
+
+    alert("कृपया सभी details भरें।");
+
+    return;
+
+  }
+
+
+  const user = {
+    name:name,
+    mobile:mobile,
+    email:email
+  };
+
+
+  localStorage.setItem(
+    "pn_user",
+    JSON.stringify(user)
+  );
+
+
+  showUser(user);
+
+  alert(
+    "Login details successfully saved! ✅"
+  );
+
+}
+
+
+function showUser(user){
+
+  document
+    .getElementById("userBox")
+    .style.display = "block";
+
+  document
+    .getElementById("userName")
+    .innerText = user.name;
+
+}
+
+
+function loadUserIntoOrder(){
+
+  const data =
+    localStorage.getItem("pn_user");
+
+  if(!data) return;
+
+  const user =
+    JSON.parse(data);
+
+  document.getElementById("orderName")
+    .value = user.name;
+
+  document.getElementById("orderMobile")
+    .value = user.mobile;
+
+  document.getElementById("orderEmail")
+    .value = user.email;
+
+}
+
+
+function logout(){
+
+  localStorage.removeItem("pn_user");
+
+  document
+    .getElementById("userBox")
+    .style.display = "none";
+
+  alert("Logged out.");
+
+}
+
+
+/* =========================
+   ORDER SUBMIT
+========================= */
+
+document
+  .getElementById("orderForm")
+  .addEventListener("submit",function(e){
+
+    e.preventDefault();
+
+
+    const name =
+      document.getElementById("orderName").value;
+
+    const mobile =
+      document.getElementById("orderMobile").value;
+
+    const email =
+      document.getElementById("orderEmail").value;
+
+    const service =
+      document.getElementById("orderService").value;
+
+    const details =
+      document.getElementById("orderDetails").value;
+
+
+    const message =
+`PN CodeX Project Request
+
+Name: ${name}
+
+Mobile: ${mobile}
+
+Email: ${email}
+
+Service: ${service}
+
+Project Details:
+${details}`;
+
+
+    const whatsappNumber = "919420822397";
+
+
+    if(whatsappNumber){
+
+      const url =
+        "https://wa.me/" +
+        whatsappNumber +
+        "?text=" +
+        encodeURIComponent(message);
+
+      window.open(url,"_blank");
+
+    }else{
+
+      /* Email fallback */
+
+      const emailSubject =
+        encodeURIComponent(
+          "PN CodeX Project Request - " + service
+        );
+
+      const emailBody =
+        encodeURIComponent(message);
+
+      window.location.href =
+        "mailto:nagosepratik2@gmail.com" +
+        "?subject=" +
+        emailSubject +
+        "&body=" +
+        emailBody;
+
+    }
+
+
+    closeOrder();
+
+});
+
+
+/* =========================
+   LOAD SAVED DATA
+========================= */
+
+window.addEventListener("load",function(){
+
+  const theme =
+    localStorage.getItem("pn_theme");
+
+  if(theme === "light"){
+
+    document.body.classList.add("light");
+
+  }
+
+
+  const data =
+    localStorage.getItem("pn_user");
+
+  if(data){
+
+    try{
+
+      const user =
+        JSON.parse(data);
+
+      showUser(user);
+
+    }catch(error){
+
+      localStorage.removeItem("pn_user");
+
+    }
+
+  }
+
+});
+
+
+/* =========================
+   ESC CLOSE MODAL
+========================= */
+
+document.addEventListener("keydown",function(e){
+
+  if(e.key === "Escape"){
+
+    closeOrder();
+    closeMenu();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>
